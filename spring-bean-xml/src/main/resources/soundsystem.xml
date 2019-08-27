@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:app.properties" file-encoding="utf-8" />
+
+    <bean id="sgtPeppers" class="com.example.soundsystem.SgtPeppers" />
+    <bean id="cdPlayer" class="com.example.soundsystem.CDPlayer">
+        <constructor-arg ref="blankDisc" />
+    </bean>
+    <!--<bean id="cdPlayer" class="com.example.soundsystem.CDPlayer" c:cd-ref="sgtPeppers" />-->
+    <!--<bean id="cdPlayer" class="com.example.soundsystem.CDPlayer" c:_0-ref="sgtPeppers"  />-->
+    <!--<bean id="cdPlayer" class="com.example.soundsystem.CDPlayer" c:_-ref="sgtPeppers"  />-->
+
+    <!--<bean id="blankDisc" class="com.example.soundsystem.BlankDisc">
+        <constructor-arg value="Blank Disc's title" />
+        <constructor-arg value="Blank Disc's author" />
+    </bean>-->
+
+    <bean id="blankDisc" class="com.example.soundsystem.BlankDisc">
+        <constructor-arg value="${disc.title}" />
+        <constructor-arg value="${disc.artist}" />
+    </bean>
+
+    <!--<bean id="blankDisc" class="com.example.soundsystem.BlankDisc"
+          c:title="Blank Disc's title"
+          c:artist="Blank Disc's author"/>-->
+
+    <!--<bean id="blankDisc" class="com.example.soundsystem.BlankDisc"
+          c:_0="Blank Disc's title"
+          c:_1="Blank Disc's author"/>-->
+
+    <bean id="fullDisc" class="com.example.soundsystem.FullDisc">
+        <constructor-arg value="Full Disc's title" />
+        <constructor-arg value="Full Disc's author" />
+        <constructor-arg>
+            <list>
+                <value>First song</value>
+                <value>Second song</value>
+                <value>Third song</value>
+                <value>Fourth song</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!--<bean id="dvdPlayer" class="com.example.soundsystem.DVDPlayer">
+        <property name="cd" ref="sgtPeppers" />
+    </bean>-->
+    <!--<bean id="dvdPlayer" class="com.example.soundsystem.DVDPlayer" p:cd-ref="sgtPeppers" />-->
+</beans>
