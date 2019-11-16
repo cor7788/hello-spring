@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 1.使用默认的构造函数创建 -->
+    <bean id="userService" class="com.example.service.impl.UserServiceImpl" init-method="init" destroy-method="destroy">
+        <property name="arr">
+            <array>
+                <value>a11</value>
+            </array>
+        </property>
+
+        <property name="list">
+            <list>
+                <value>a22</value>
+            </list>
+        </property>
+
+        <property name="set">
+            <set>
+                <value>a33</value>
+            </set>
+        </property>
+
+        <property name="map">
+            <map>
+                <entry key="a44" value="b44"/>
+            </map>
+        </property>
+
+        <property name="props">
+            <props>
+                <prop key="a55">b55</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 2.使用某个类中方法创建 -->
+    <bean id="userServiceFactory" class="com.example.factory.UserServiceFactory"/>
+    <bean id="userService1" factory-bean="userServiceFactory" factory-method="getUserService"/>
+
+    <!-- 3.使用某个类中的静态方法创建 -->
+    <bean id="userService2" class="com.example.factory.UserServiceFactory" factory-method="getUserServiceStatic"/>
+
+</beans>
