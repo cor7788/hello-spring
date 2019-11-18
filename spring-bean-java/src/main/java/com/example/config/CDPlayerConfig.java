@@ -19,7 +19,6 @@ public class CDPlayerConfig {
     }
 
     @Bean
-
     public CompactDisc randomCD() {
         int choice = (int) Math.floor(Math.random() * 2);
         // Random random = new Random();
