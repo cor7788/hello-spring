@@ -15,6 +15,7 @@
         <module>spring-bean-profile</module>
         <module>spring-start</module>
         <module>spring-demo</module>
+        <module>spring_mvc</module>
     </modules>
 
     <properties>
