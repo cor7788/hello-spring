@@ -6,7 +6,9 @@
 <body>
 <h3>hello 页面</h3>
 
-${requestScope.user}
-${sessionScope.user}
+${requestScope.user} <br>
+${sessionScope.user} <br>
+${requestScope.zs} <br>
+${requestScope.msg}<br>
 </body>
 </html>

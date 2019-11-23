@@ -7,7 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
@@ -78,7 +83,7 @@ public class HelloController {
     @RequestMapping("/model_attribute")
     public String modelAttribute(User user, @ModelAttribute("acc") Account account, Model model) {
         Map<String, Object> map = model.asMap();
-        for(String key: map.keySet()) {
+        for (String key : map.keySet()) {
             Object value = map.get(key);
             System.out.println(key + "---" + value);
         }
@@ -107,5 +112,55 @@ public class HelloController {
         return "hello";
     }
 
+    @RequestMapping("/string")
+    public String testString(Model model) {
+        User user = new User();
+        user.setName("张三");
+        model.addAttribute("zs", user);
+        return "hello";
+    }
+
+    @RequestMapping("/void11")
+    public void void11(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // 请求转发，此时不经过 ViewResolver,需要注意地址的拼写
+        request.getRequestDispatcher("/WEB-INF/pages/hello.jsp").forward(request, response);
+    }
+
+
+    @RequestMapping("/void22")
+    public void void22(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        // 重定向，/WEB-INF 目录下的页面无法访问。
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
+    }
+
+    @RequestMapping("/mav")
+    public ModelAndView mav() {
+        ModelAndView modelAndView = new ModelAndView();
+        // 填充数据
+        modelAndView.addObject("msg", "你好");
+        // 设置逻辑视图名
+        modelAndView.setViewName("hello");
+        return modelAndView;
+    }
+
+    @RequestMapping("/forward")
+    public String forward() {
+        return "forward:hello";
+    }
+
+    @RequestMapping("/redirect")
+    public String redirect() {
+        return "redirect:/index.jsp";
+    }
+
+    @RequestMapping("/ajax")
+    @ResponseBody
+    public User ajax(User user) {
+        System.out.println(user);
+        user.setBirthday(new Date());
+        return user;
+    }
 
 }
