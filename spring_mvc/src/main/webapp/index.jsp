@@ -87,6 +87,19 @@
     <button type="submit" class="btn btn-default">提交</button>
 </form>
 
+<h3>请求参数绑定-request_body</h3>
+<form class="form-inline" action="request_body" method="post">
+    <div class="form-group">
+        <label class="sr-only" for="name3"></label>
+        <input type="text" class="form-control" id="name3" name="name" placeholder="姓名">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="age3"></label>
+        <input type="number" class="form-control" id="age3" name="age" placeholder="年龄">
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+</form>
+
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
