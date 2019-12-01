@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- 配置不过滤的静态资源 -->
+    <security:http security="none" pattern="/login.jsp"/>
+    <security:http security="none" pattern="/fail.html"/>
+
+    <security:http auto-config="true" use-expressions="false">
+        <!-- access有多个角色时，用逗号分隔 -->
+        <security:intercept-url pattern="/**" access="ROLE_ADMIN"/>
+        <security:form-login login-page="/login.jsp" login-processing-url="/login" username-parameter="username"
+                             password-parameter="password" authentication-failure-url="/fail.html"
+                             default-target-url="/success.html" authentication-success-forward-url="/success.html"/>
+        <security:csrf disabled="true" />
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="admin" password="{noop}123456" authorities="ROLE_ADMIN"/>
+                <security:user name="jack" password="{noop}123456" authorities="ROLE_USER"/>
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
+</beans>
