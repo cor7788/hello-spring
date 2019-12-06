@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 public class UserInfo implements Serializable {
 
+    private Integer id;
     private String email;
     @NotNull
     @Size(min = 3, max = 6)
@@ -18,10 +19,19 @@ public class UserInfo implements Serializable {
     @Override
     public String toString() {
         return "UserInfo{" +
-                "email='" + email + '\'' +
+                "id=" + id +
+                ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
